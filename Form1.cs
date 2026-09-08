@@ -1,4 +1,3 @@
-using MySqlConnector;
 using System.Diagnostics;
 
 namespace projectX
@@ -8,7 +7,6 @@ namespace projectX
         public LoginForm()
         {
             InitializeComponent();
-            //DB.createDB();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,7 +49,8 @@ namespace projectX
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Ошибка при обращении к базе: {ex.Message}");
+                MessageBox.Show("❌ Что-то пошло не так...", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine(ex.Message);
             }
             finally
             {

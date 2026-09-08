@@ -33,9 +33,15 @@ namespace projectX
                     return;
                 }
 
-                if (password.Length < 8)
+                if (password.Length < 8 || password.Length > 24)
                 {
-                    MessageBox.Show("Пароль должен быть минимум 8 символов", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Пароль должен быть от 8 до 24 символов", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (login.Length < 3 || login.Length > 50)
+                {
+                    MessageBox.Show("Имя должно быть от 3 до 50 символов", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -58,19 +64,15 @@ namespace projectX
                 }
                 else
                 {
-                    MessageBox.Show("❌ Не удалось зарегестрироваться!", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("❌ Не удалось зарегистрироваться!", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
             }
-            catch (MySqlException ex) when (ex.Number == 1062)
-            {
-                // Сработает ИМЕННО тогда, когда логин уже занят
-                MessageBox.Show("Пользователь с таким логином уже существует!", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Ошибка при обращении к базе: {ex.Message}");
+                MessageBox.Show("❌ Что-то пошло не так...", "Ошибка регистрации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine(ex.Message);
             }
             finally
             {

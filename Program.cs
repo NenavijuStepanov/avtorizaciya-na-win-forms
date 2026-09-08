@@ -16,19 +16,6 @@ namespace projectX
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            try
-            {
-                await DB.createDB();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка подключения к БД: {ex.Message}",
-                                "Критическая ошибка",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                return; // Завершаем работу, если база не создалась
-            }
-
             Application.Run(new LoginForm());
         }
     }
